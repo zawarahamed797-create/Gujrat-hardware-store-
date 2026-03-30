@@ -3,235 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>گجرات کچن ہارڈ ویئر - ماڈیولر کچن اسپیشلسٹ</title>
+    <title>گجرات کچن ہارڈ ویئر - سمارٹ آرڈر سسٹم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --gold: #d4af37; /* لگژری کچن ہینڈلز کا رنگ */
-            --dark-grey: #2c3e50; 
-            --premium-black: #1a1a1a;
-            --soft-grey: #f4f4f4;
-        }
+        :root { --gold: #d4af37; --dark: #1a1a1a; --soft: #f8f9fa; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; text-align: right; background: #fff; }
+        
+        header { background: white; padding: 15px 10%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        
+        /* Cart Icon */
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.5rem; color: var(--dark); }
+        #cart-count { position: absolute; top: -10px; right: -10px; background: var(--gold); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: white;
-            color: var(--premium-black);
-            text-align: right;
-            line-height: 1.6;
-        }
+        .hero { background: var(--dark); color: white; padding: 60px 10%; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px 10%; }
+        
+        /* Product Card */
+        .product-card { border: 1px solid #eee; border-radius: 10px; padding: 20px; text-align: center; transition: 0.3s; }
+        .product-card:hover { border-color: var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .product-card img { width: 100%; border-radius: 5px; height: 180px; object-fit: cover; background: #eee; }
+        .price { font-weight: bold; color: var(--gold); font-size: 1.2rem; margin: 10px 0; }
+        
+        .add-to-cart { background: var(--dark); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+        .add-to-cart:hover { background: var(--gold); }
 
-        /* Top Info Bar */
-        .top-info {
-            background: var(--premium-black);
-            color: var(--gold);
-            padding: 8px 10%;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: space-between;
-        }
+        /* Cart Sidebar */
+        #cart-sidebar { position: fixed; top: 0; left: -100%; width: 350px; height: 100%; background: white; box-shadow: 2px 0 10px rgba(0,0,0,0.2); transition: 0.4s; z-index: 2000; padding: 20px; overflow-y: auto; }
+        #cart-sidebar.active { left: 0; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 10px 0; font-size: 0.9rem; }
+        .close-cart { cursor: pointer; font-size: 1.5rem; color: red; }
+        
+        .whatsapp-order-btn { background: #25D366; color: white; border: none; width: 100%; padding: 15px; border-radius: 5px; font-weight: bold; margin-top: 20px; cursor: pointer; font-size: 1rem; }
 
-        /* Luxury Header */
-        header {
-            padding: 20px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--soft-grey);
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 1000;
-        }
-
-        .logo-box h1 { margin: 0; font-size: 1.8rem; color: var(--dark-grey); }
-        .logo-box span { color: var(--gold); font-weight: bold; }
-
-        /* Modern Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1470&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-
-        .hero-text h2 { font-size: 3rem; margin-bottom: 10px; color: var(--gold); }
-        .hero-text p { font-size: 1.3rem; margin-bottom: 25px; }
-
-        /* Specialized Categories */
-        .section { padding: 80px 10%; }
-        .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; }
-        .section-title span { color: var(--gold); border-bottom: 3px solid var(--gold); }
-
-        .kitchen-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .kitchen-card {
-            background: var(--soft-grey);
-            border-radius: 15px;
-            padding: 35px 20px;
-            text-align: center;
-            transition: 0.3s ease;
-            border: 1px solid #eee;
-        }
-
-        .kitchen-card:hover { 
-            background: white; 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-color: var(--gold);
-        }
-
-        .kitchen-card i { font-size: 3.5rem; color: var(--dark-grey); margin-bottom: 20px; }
-        .kitchen-card h3 { color: var(--premium-black); font-size: 1.5rem; }
-
-        /* Price Inquiry Button */
-        .wa-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 25px;
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        /* Future Feature: Expert Advice */
-        .expert-advice {
-            background: var(--dark-grey);
-            color: white;
-            padding: 50px 10%;
-            text-align: center;
-            border-radius: 0;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--premium-black);
-            color: #888;
-            padding: 40px 10%;
-            text-align: center;
-        }
-
-        /* Floating Contact */
-        .floating-contact {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--gold);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-decoration: none;
-            font-weight: bold;
-            z-index: 2000;
-        }
-
-        @media (max-width: 768px) {
-            .hero-text h2 { font-size: 2rem; }
-            header { flex-direction: column; gap: 15px; }
-        }
+        @media (max-width: 768px) { #cart-sidebar { width: 100%; } }
     </style>
 </head>
 <body>
 
-<div class="top-info">
-    <span><i class="fas fa-map-marker-alt"></i> مین مارکیٹ، گجرات (کچن ہارڈ ویئر اسپیشلسٹ)</span>
-    <span><i class="fas fa-phone-alt"></i> 0300-1234567</span>
-</div>
-
 <header>
-    <div class="logo-box">
-        <h1>گجرات <span>کچن ہارڈ ویئر</span></h1>
+    <div style="font-size: 1.5rem; font-weight: bold;">گجرات <span style="color: var(--gold);">کچن ہارڈ ویئر</span></div>
+    <div class="cart-icon" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
     </div>
-    <a href="https://wa.me/923001234567" class="wa-btn"><i class="fab fa-whatsapp"></i> واٹس ایپ آرڈر</a>
 </header>
 
-<section class="hero">
-    <div class="hero-text">
-        <h2>اپنے کچن کو جدید بنائیں</h2>
-        <p>کچن الماری کے تمام امپورٹڈ ہینڈلز، قلابے اور جدید باسکٹ دستیاب ہیں</p>
-        <a href="#products" class="wa-btn" style="background: var(--gold);">ہمارا کیٹلاگ دیکھیں</a>
+<div class="hero">
+    <h1>پریمیم کچن ایکسیسریز</h1>
+    <p>سامان سلیکٹ کریں اور لسٹ واٹس ایپ پر بھیج کر ریٹ معلوم کریں</p>
+</div>
+
+<div class="grid" id="product-list">
+    <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Hinges">
+        <h3>سوفٹ کلوز قلابہ (Hinges)</h3>
+        <p>Blum Quality - 304 Steel</p>
+        <div class="price">ریٹ کے لیے ایڈ کریں</div>
+        <button class="add-to-cart" onclick="addToCart('Soft Close Hinge', 'Hinges')">کارٹ میں ڈالیں</button>
     </div>
-</section>
 
-<section class="section" id="products">
-    <h2 class="section-title">ہماری <span>اسپیشلٹیز</span></h2>
-    <div class="kitchen-grid">
-        <div class="kitchen-card">
-            <i class="fas fa-sign-out-alt"></i>
-            <h3>پل آؤٹ باسکٹس</h3>
-            <p>سٹیل کی پلیٹ ریک، کٹلری ٹرے اور کارنر باسکٹس۔</p>
-            <a href="https://wa.me/923001234567?text=Kitchen Basket Price" class="wa-btn">قیمت پوچھیں</a>
-        </div>
-        <div class="kitchen-card">
-            <i class="fas fa-door-closed"></i>
-            <h3>سوفٹ کلوز قلابے</h3>
-            <p>آہستہ اور خاموشی سے بند ہونے والے جدید ہائیڈرولک قلابے (Hinges)۔</p>
-            <a href="https://wa.me/923001234567?text=Kitchen Hinges Price" class="wa-btn">قیمت پوچھیں</a>
-        </div>
-        <div class="kitchen-card">
-            <i class="fas fa-grip-lines-vertical"></i>
-            <h3>لگزری ہینڈلز</h3>
-            <p>گولڈن، اینٹیک، اور بلیک فنش میں کچن الماری کے نفیس ہینڈلز۔</p>
-            <a href="https://wa.me/923001234567?text=Cabinet Handles" class="wa-btn">قیمت پوچھیں</a>
-        </div>
-        <div class="kitchen-card">
-            <i class="fas fa-window-maximize"></i>
-            <h3>چینل اور سلائیڈرز</h3>
-            <p>کچن درازوں کے لیے مضبوط ٹیلیسکوپک چینلز اور سوفٹ کلوز ریلنگ۔</p>
-            <a href="https://wa.me/923001234567?text=Drawer Slides" class="wa-btn">قیمت پوچھیں</a>
-        </div>
+    <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Basket">
+        <h3>کٹلری باسکٹ (15x20)</h3>
+        <p>Stainless Steel - 10 Year Warranty</p>
+        <div class="price">ریٹ کے لیے ایڈ کریں</div>
+        <button class="add-to-cart" onclick="addToCart('Cutlery Basket', 'Baskets')">کارٹ میں ڈالیں</button>
     </div>
-</section>
 
-<section class="expert-advice">
-    <h2>کچن پیمائش اور سامان کی لسٹ؟</h2>
-    <p>اگر آپ نیا کچن بنوا رہے ہیں تو ہمیں واٹس ایپ پر نقشہ بھیجیں، ہم آپ کو سامان کی لسٹ اور تخمینہ (Quotation) بنا کر دیں گے۔</p>
-    <a href="https://wa.me/923001234567" class="wa-btn" style="background: white; color: var(--premium-black);">مفت مشورہ لیں</a>
-</section>
-
-<section class="section">
-    <h2 class="section-title">ہم کیوں؟</h2>
-    <div class="kitchen-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-        <div style="text-align: center;">
-            <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--gold);"></i>
-            <h4>10 سال وارنٹی</h4>
-            <p>زنگ نہ لگنے کی گارنٹی</p>
-        </div>
-        <div style="text-align: center;">
-            <i class="fas fa-truck" style="font-size: 2.5rem; color: var(--gold);"></i>
-            <h4>پورے پاکستان میں ڈلیوری</h4>
-            <p>محفوظ پیکنگ کے ساتھ</p>
-        </div>
-        <div style="text-align: center;">
-            <i class="fas fa-check-double" style="font-size: 2.5rem; color: var(--gold);"></i>
-            <h4>اصل برانڈز</h4>
-            <p>صرف کوالٹی کا سامان</p>
-        </div>
+    <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Handle">
+        <h3>گولڈن لگزری ہینڈل</h3>
+        <p>Antique Finish - 8 Inch</p>
+        <div class="price">ریٹ کے لیے ایڈ کریں</div>
+        <button class="add-to-cart" onclick="addToCart('Golden Handle', 'Handles')">کارٹ میں ڈالیں</button>
     </div>
-</section>
+</div>
 
-<footer>
-    <p>© 2026-2036 گجرات کچن ہارڈ ویئر اسپیشلسٹ</p>
-    <p>ایڈریس: مین ہارڈ ویئر مارکیٹ، گجرات، پنجاب</p>
-</footer>
+<div id="cart-sidebar">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">
+        <h3>آپ کا آرڈر (لسٹ)</h3>
+        <span class="close-cart" onclick="toggleCart()">&times;</span>
+    </div>
+    <div id="cart-items-container">
+        </div>
+    <button class="whatsapp-order-btn" onclick="sendWhatsAppOrder()">
+        <i class="fab fa-whatsapp"></i> واٹس ایپ پر لسٹ بھیجیں
+    </button>
+</div>
 
-<a href="tel:+923001234567" class="floating-contact">
-    <i class="fas fa-phone-alt"></i> کال کریں
-</a>
+<script>
+    let cart = [];
+
+    function toggleCart() {
+        document.getElementById('cart-sidebar').classList.toggle('active');
+    }
+
+    function addToCart(name, category) {
+        cart.push({ name, category });
+        updateCartUI();
+        // چھوٹی سی اینیمیشن
+        alert(name + " لسٹ میں شامل کر دیا گیا ہے");
+    }
+
+    function updateCartUI() {
+        const count = document.getElementById('cart-count');
+        const container = document.getElementById('cart-items-container');
+        
+        count.innerText = cart.length;
+        container.innerHTML = '';
+
+        cart.forEach((item, index) => {
+            container.innerHTML += `
+                <div class="cart-item">
+                    <span>${item.name} (${item.category})</span>
+                    <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeItem(${index})"></i>
+                </div>
+            `;
+        });
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    }
+
+    function sendWhatsAppOrder() {
+        if (cart.length === 0) {
+            alert("آپ کی لسٹ خالی ہے!");
+            return;
+        }
+
+        let phoneNumber = "923448506173"; // اپنا نمبر یہاں لکھیں
+        let message = "السلام علیکم! مجھے ان چیزوں کے ریٹ چاہئیں:%0A%0A";
+        
+        cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.name} (${item.category})%0A`;
+        });
+
+        message += "%0Aبرائے مہربانی ریٹ بتا دیں۔ شکریہ۔";
+        
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }
+</script>
 
 </body>
 </html>
