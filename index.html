@@ -20,17 +20,16 @@
         
         .logo-box {
             position: relative;
-            padding: 8px 20px;
+            padding: 10px 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
             background: rgba(255,255,255,0.05);
             border-radius: 50px;
             overflow: hidden;
-            border: 1px solid rgba(197, 160, 89, 0.3);
+            border: 1px solid rgba(197, 160, 89, 0.4);
         }
 
-        /* Rotating Light Effect Around Logo */
+        /* Light Rotation Effect */
         .logo-box::before {
             content: '';
             position: absolute;
@@ -39,7 +38,7 @@
             width: 200%;
             height: 200%;
             background: conic-gradient(transparent, transparent, transparent, var(--accent));
-            animation: rotateLight 4s linear infinite;
+            animation: rotateLight 3s linear infinite;
             z-index: 1;
         }
         
@@ -61,21 +60,32 @@
             z-index: 3;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             text-decoration: none;
             color: var(--accent);
             font-weight: 900;
             font-size: 18px;
+            letter-spacing: 0.5px;
         }
 
-        /* Rotating Gear Icon */
-        .logo-content i {
-            font-size: 22px;
-            animation: rotateGear 5s linear infinite;
+        /* Animated Tools Icon */
+        .tools-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
         }
 
-        @keyframes rotateGear {
-            100% { transform: rotate(360deg); }
+        .tools-icon .fa-tools {
+            font-size: 20px;
+            animation: toolShake 2s infinite ease-in-out;
+        }
+
+        @keyframes toolShake {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(20deg) scale(1.1); }
         }
 
         .search-container { width: 100%; position: relative; z-index: 3; }
@@ -94,7 +104,7 @@
         .driver-card { background: #fcf8f3; padding: 8px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #efe5d9; font-size: 12px; }
         .btn-call-sm { background: var(--primary); color: white; text-decoration: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
 
-        /* Products */
+        /* Products Grid */
         .container { padding: 15px; }
         .section-title { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 20px; border-right: 5px solid var(--accent); padding-right: 10px; }
         .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
@@ -112,7 +122,7 @@
         .card-price { color: var(--success); font-weight: 800; font-size: 20px; margin: 10px 0; }
         .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; }
 
-        /* Floating Cart Button */
+        /* Cart Floating Button */
         .cart-btn-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,0,0,0.3); font-size: 24px; border: 2px solid var(--accent); }
         .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; display: flex; justify-content: center; align-items: center; font-weight: bold; }
 
@@ -122,7 +132,7 @@
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
         #cart-list { flex-grow: 1; overflow-y: auto; margin: 15px 0; }
         
-        /* Advance Payment Alert */
+        /* Payment System UI */
         .payment-alert { background: #fff3cd; color: #856404; padding: 10px; border-radius: 8px; font-size: 12px; margin-bottom: 10px; border: 1px solid #ffeeba; text-align: center; }
         .whatsapp-btn { background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 18px; border: none; width: 100%; margin-top: auto; }
     </style>
@@ -136,7 +146,9 @@
 <header>
     <div class="logo-box">
         <a href="#" class="logo-content">
-            <i class="fas fa-cog"></i>
+            <div class="tools-icon">
+                <i class="fas fa-tools"></i>
+            </div>
             <span>GUJRAT HARDWARE</span>
         </a>
     </div>
