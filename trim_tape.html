@@ -51,6 +51,12 @@
         .card { background: white; border-radius: 12px; padding: 15px; border: 1px solid #eee; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .main-img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; }
         
+        /* Styles for Color Selector (Dot Style) */
+        .color-selector { display: flex; justify-content: center; gap: 10px; margin: 10px 0; }
+        .color-dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: 0.2s; }
+        .color-dot.active { border-color: var(--primary); transform: scale(1.1); }
+
+        /* Styles for Photo Selector (Existing) */
         .photo-selector { display: flex; justify-content: center; gap: 5px; margin: 10px 0; overflow-x: auto; padding-bottom: 5px; }
         .thumb-img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; border: 2px solid transparent; cursor: pointer; }
         .thumb-img.active { border-color: var(--accent); }
@@ -111,11 +117,14 @@
         <div class="card">
             <img id="display-1" class="main-img" src="https://img.icons8.com/color/144/aluminum.png" alt="Trim">
             <h3 id="title-1">ایلومینیم T-ٹرم (سلور)</h3>
-            <div class="photo-selector">
-                <img class="thumb-img active" src="https://img.icons8.com/color/144/aluminum.png" onclick="changeProduct(1, 'سلور', this.src, this)">
-                <img class="thumb-img" src="https://img.icons8.com/color/144/gold-bars.png" onclick="changeProduct(1, 'گولڈن', this.src, this)">
-                <img class="thumb-img" src="https://img.icons8.com/color/144/black-square.png" onclick="changeProduct(1, 'بلیک', this.src, this)">
+            
+            <p style="font-size: 12px; color: #666; margin-bottom: 5px;">رنگ منتخب کریں:</p>
+            <div class="color-selector">
+                <div class="color-dot active" style="background: #e0e0e0; border: 1px solid #ccc;" onclick="changeProduct(1, 'سلور', 'https://img.icons8.com/color/144/aluminum.png', this)"></div>
+                <div class="color-dot" style="background: #ffd700;" onclick="changeProduct(1, 'گولڈن', 'https://img.icons8.com/color/144/gold-bars.png', this)"></div>
+                <div class="color-dot" style="background: #212121;" onclick="changeProduct(1, 'بلیک', 'https://img.icons8.com/color/144/black-square.png', this)"></div>
             </div>
+
             <div class="card-price">Rs. 450</div>
             <button class="btn-add" onclick="addToCartById(1)">کارٹ میں ڈالیں</button>
         </div>
@@ -172,7 +181,9 @@
         document.getElementById(`display-${id}`).src = imgUrl;
         document.getElementById(`title-${id}`).innerText = currentSelection[id].name;
         
-        element.parentElement.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active'));
+        // Handling both dot and photo selector class names
+        let selectorClass = element.classList.contains('color-dot') ? '.color-dot' : '.thumb-img';
+        element.parentElement.querySelectorAll(selectorClass).forEach(img => img.classList.remove('active'));
         element.classList.add('active');
     }
 
