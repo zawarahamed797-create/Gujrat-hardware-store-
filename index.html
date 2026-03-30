@@ -10,14 +10,12 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; width: 100%; }
         
-        /* 1. Ticker Right to Left */
         .ticker-wrap { background: var(--accent); color: white; padding: 8px 0; font-weight: bold; overflow: hidden; white-space: nowrap; position: relative; z-index: 1001; }
         .ticker { display: inline-block; animation: marquee 20s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         header { background: var(--primary); color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         
-        /* 2. Animated Logo */
         .logo-box { 
             position: relative; 
             padding: 10px 25px; 
@@ -48,12 +46,13 @@
         .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 480px) { .grid { grid-template-columns: 1fr 1fr; } }
         
-        /* Sheet Card Styles */
         .card { background: white; border-radius: 12px; padding: 15px; border: 1px solid #eee; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .main-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; }
-        .color-selector { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
-        .color-dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: 0.2s; }
-        .color-dot.active { border-color: var(--primary); transform: scale(1.2); }
+        .main-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; }
+        
+        /* Photo Selector Styles */
+        .photo-selector { display: flex; justify-content: center; gap: 8px; margin: 15px 0; overflow-x: auto; padding-bottom: 5px; }
+        .thumb-img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; border: 2px solid transparent; cursor: pointer; transition: 0.2s; }
+        .thumb-img.active { border-color: var(--accent); transform: scale(1.1); }
         
         .card-price { color: var(--success); font-weight: 800; font-size: 20px; margin: 10px 0; }
         .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
@@ -109,11 +108,12 @@
             <img id="sheet-display" class="main-img" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=500&auto=format&fit=crop" alt="UV Sheet">
             <h3 id="sheet-title">UV پریمیم شیٹ (سفید)</h3>
             
-            <p style="font-size: 12px; color: #666; margin-bottom: 5px;">رنگ منتخب کریں:</p>
-            <div class="color-selector">
-                <div class="color-dot active" style="background: #ffffff; border: 1px solid #ddd;" onclick="changeSheet('سفید', 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=500&auto=format&fit=crop', this)"></div>
-                <div class="color-dot" style="background: #2c3e50;" onclick="changeSheet('گرے', 'https://images.unsplash.com/photo-1513519247481-84a22c637559?q=80&w=500&auto=format&fit=crop', this)"></div>
-                <div class="color-dot" style="background: #5d4037;" onclick="changeSheet('براؤن ووڈ', 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=500&auto=format&fit=crop', this)"></div>
+            <p style="font-size: 12px; color: #666; margin-bottom: 5px;">ڈیزائن منتخب کریں:</p>
+            <div class="photo-selector">
+                <img class="thumb-img active" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=150&auto=format&fit=crop" onclick="changeSheet('سفید ڈیزائن', this.src, this)">
+                <img class="thumb-img" src="https://images.unsplash.com/photo-1513519247481-84a22c637559?q=80&w=150&auto=format&fit=crop" onclick="changeSheet('گرے میٹ', this.src, this)">
+                <img class="thumb-img" src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=150&auto=format&fit=crop" onclick="changeSheet('ماربل ٹیکسچر', this.src, this)">
+                <img class="thumb-img" src="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?q=80&w=150&auto=format&fit=crop" onclick="changeSheet('ڈارک ووڈ', this.src, this)">
             </div>
 
             <div class="card-price">Rs. 8,500</div>
@@ -139,26 +139,24 @@
 
 <script>
     let cart = JSON.parse(localStorage.getItem('gujrat_hardware_cart')) || [];
-    let selectedColor = "سفید";
+    let selectedDesign = "سفید ڈیزائن";
     let selectedPrice = 8500;
 
     window.onload = function() { updateUI(); };
 
     function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
 
-    // Change Sheet Logic
-    function changeSheet(color, imgUrl, element) {
-        selectedColor = color;
+    function changeSheet(name, imgUrl, element) {
+        selectedDesign = name;
         document.getElementById('sheet-display').src = imgUrl;
-        document.getElementById('sheet-title').innerText = `UV پریمیم شیٹ (${color})`;
+        document.getElementById('sheet-title').innerText = `UV پریمیم شیٹ (${name})`;
         
-        // Update active dot
-        document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
+        document.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active'));
         element.classList.add('active');
     }
 
     function addSheetToCart() {
-        let fullName = `UV Sheet (${selectedColor})`;
+        let fullName = `UV Sheet (${selectedDesign})`;
         addToCart(fullName, selectedPrice);
     }
 
@@ -167,8 +165,6 @@
         item ? item.quantity++ : cart.push({name, price, quantity: 1});
         localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
         updateUI();
-        // Optional: Open cart automatically when item added
-        // toggleCart(); 
     }
 
     function updateUI() {
