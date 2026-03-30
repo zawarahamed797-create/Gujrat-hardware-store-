@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ٹولز - گجرات ہارڈ ویئر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #1a2a3a; --accent: #c5a059; --bg: #fdfaf5; --success: #27ae60; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; width: 100%; }
+        
+        .ticker-wrap { background: var(--accent); color: white; padding: 8px 0; font-weight: bold; overflow: hidden; white-space: nowrap; position: relative; z-index: 1001; }
+        .ticker { display: inline-block; animation: marquee 25s linear infinite; direction: ltr; }
+        @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        header { background: var(--primary); color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .logo-box { position: relative; padding: 10px 25px; display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 50px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.4); }
+        .logo-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, transparent, var(--accent)); animation: rotateLight 3s linear infinite; z-index: 1; }
+        .logo-box::after { content: ''; position: absolute; inset: 2px; background: var(--primary); border-radius: 50px; z-index: 2; }
+        @keyframes rotateLight { 100% { transform: rotate(360deg); } }
+        .logo-content { position: relative; z-index: 3; text-decoration: none; color: var(--accent); font-weight: 900; font-size: 18px; }
+
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1470&auto=format&fit=crop'); height: 160px; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+        .hero h1 { font-size: 24px; margin: 0; color: var(--accent); }
+
+        .category-bar { display: flex; overflow-x: auto; gap: 15px; padding: 20px 15px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); scrollbar-width: none; }
+        .category-bar::-webkit-scrollbar { display: none; }
+        .cat-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; color: var(--primary); min-width: 70px; }
+        .cat-icon { width: 50px; height: 50px; background: #f0f4f8; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); border: 1px solid #e0e0e0; }
+        .cat-item.active .cat-icon { background: var(--accent); color: white; }
+        .cat-item span { font-size: 11px; font-weight: bold; }
+
+        .container { padding: 15px; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 480px) { .grid { grid-template-columns: 1fr 1fr; } }
+        .card { background: white; border-radius: 12px; padding: 15px; border: 1px solid #eee; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .main-img { width: 100%; height: 150px; object-fit: contain; }
+        .card-price { color: var(--success); font-weight: 800; font-size: 20px; margin: 10px 0; }
+        .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+        .cart-btn-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1500; border: 2px solid var(--accent); }
+        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; }
+        #cart-panel.active { left: 0; }
+    </style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+    <div class="ticker">GUJRAT HARDWARE STORE: PREMIUM KITCHEN SHEETS & ACCESSORIES | CONTACT: 03130781469 | DELIVERY AVAILABLE 🚀</div>
+</div>
+
+<header>
+    <div class="logo-box"><div class="logo-content">GUJRAT HARDWARE</div></div>
+</header>
+
+<div class="hero">
+    <h1>پروفیشنل ٹولز</h1>
+    <p>منڈی بہاؤالدین</p>
+</div>
+
+<div class="category-bar">
+    <a href="index.html" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-layer-group"></i></div>
+        <span>شیٹس</span>
+    </a>
+    <a href="trim_tape.html" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-cut"></i></div>
+        <span>ٹرم و ٹیپ</span>
+    </a>
+    <a href="hardware.html" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-door-open"></i></div>
+        <span>ہارڈ ویئر</span>
+    </a>
+    <a href="accessories.html" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-blender"></i></div>
+        <span>ایکسیسریز</span>
+    </a>
+    <a href="tools.html" class="cat-item active">
+        <div class="cat-icon"><i class="fas fa-tools"></i></div>
+        <span>ٹولز</span>
+    </a>
+</div>
+
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <img class="main-img" src="https://img.icons8.com/color/144/drill.png">
+            <h3>الیکٹرک ڈرل مشین</h3>
+            <div class="card-price">Rs. 5,500</div>
+            <button class="btn-add" onclick="addToCart('Drill Machine', 5500)">کارٹ میں ڈالیں</button>
+        </div>
+        <div class="card">
+            <img class="main-img" src="https://img.icons8.com/color/144/hammer.png">
+            <h3>اسٹیل ہیمر (Hammer)</h3>
+            <div class="card-price">Rs. 850</div>
+            <button class="btn-add" onclick="addToCart('Hammer', 850)">کارٹ میں ڈالیں</button>
+        </div>
+    </div>
+</div>
+
+<div class="cart-btn-float" onclick="toggleCart()">
+    <i class="fas fa-shopping-cart"></i>
+    <div id="count" style="position:absolute; top:-5px; right:-5px; background:var(--accent); color:white; width:22px; height:22px; border-radius:50%; font-size:11px; display:flex; justify-content:center; align-items:center;">0</div>
+</div>
+
+<div id="cart-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--accent); padding-bottom:10px;">
+        <h2 style="margin:0; font-size:18px;">آپ کا آرڈر</h2>
+        <button onclick="toggleCart()" style="border:none; background:none; font-size:30px;">&times;</button>
+    </div>
+    <div id="cart-list" style="flex-grow:1; overflow-y:auto; margin:15px 0;"></div>
+    <div id="total" style="font-weight:bold; padding:10px; background:#f9f9f9;">ٹوٹل بل: Rs. 0</div>
+    <button style="background:#25D366; color:white; padding:15px; border:none; margin-top:10px; border-radius:10px; font-weight:bold; width:100%;" onclick="sendWhatsApp()">واٹس ایپ آرڈر کریں</button>
+</div>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem('gujrat_hardware_cart')) || [];
+    window.onload = function() { updateUI(); };
+    function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
+    function addToCart(name, price) {
+        let item = cart.find(i => i.name === name);
+        item ? item.quantity++ : cart.push({name, price, quantity: 1});
+        localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
+        updateUI();
+    }
+    function updateUI() {
+        const list = document.getElementById('cart-list');
+        let total = 0; let count = 0;
+        list.innerHTML = "";
+        cart.forEach((item, index) => {
+            total += (item.price * item.quantity);
+            count += item.quantity;
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                <span>${item.name} x ${item.quantity}</span>
+                <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+            </div>`;
+        });
+        document.getElementById('count').innerText = count;
+        document.getElementById('total').innerText = "ٹوٹل بل: Rs. " + total.toLocaleString();
+    }
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
+        updateUI();
+    }
+    function sendWhatsApp() {
+        if(cart.length === 0) return alert("کارٹ خالی ہے!");
+        let text = "*گجرات ہارڈ ویئر - آرڈر*%0A";
+        cart.forEach(item => text += `• ${item.name} (${item.quantity})%0A`);
+        window.open(`https://wa.me/923130781469?text=${text}`, '_blank');
+    }
+</script>
+</body>
+</html>
+
