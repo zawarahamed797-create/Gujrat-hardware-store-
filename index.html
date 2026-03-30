@@ -10,16 +10,29 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; width: 100%; }
         
+        /* 1. Ticker Right to Left */
         .ticker-wrap { background: var(--accent); color: white; padding: 8px 0; font-weight: bold; overflow: hidden; white-space: nowrap; position: relative; z-index: 1001; }
-        .ticker { display: inline-block; animation: marquee 25s linear infinite; direction: ltr; }
-        @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .ticker { display: inline-block; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         header { background: var(--primary); color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .logo-box { position: relative; padding: 10px 25px; display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 50px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.4); }
-        .logo-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, transparent, var(--accent)); animation: rotateLight 3s linear infinite; z-index: 1; }
-        .logo-box::after { content: ''; position: absolute; inset: 2px; background: var(--primary); border-radius: 50px; z-index: 2; }
-        @keyframes rotateLight { 100% { transform: rotate(360deg); } }
-        .logo-content { position: relative; z-index: 3; text-decoration: none; color: var(--accent); font-weight: 900; font-size: 18px; }
+        
+        /* 2. Animated Logo */
+        .logo-box { 
+            position: relative; 
+            padding: 10px 25px; 
+            display: flex; 
+            align-items: center; 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 50px; 
+            border: 2px solid var(--accent);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes logoGlow {
+            from { box-shadow: 0 0 5px var(--accent); transform: scale(1); }
+            to { box-shadow: 0 0 20px var(--accent); transform: scale(1.05); }
+        }
+        .logo-content { text-decoration: none; color: var(--accent); font-weight: 900; font-size: 22px; letter-spacing: 1px; }
 
         .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1470&auto=format&fit=crop'); height: 160px; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
         .hero h1 { font-size: 24px; margin: 0; color: var(--accent); }
@@ -34,13 +47,19 @@
         .container { padding: 15px; }
         .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 480px) { .grid { grid-template-columns: 1fr 1fr; } }
-        .card { background: white; border-radius: 12px; padding: 15px; border: 1px solid #eee; text-align: center; }
-        .main-img { width: 100%; height: 150px; object-fit: contain; }
+        
+        /* Sheet Card Styles */
+        .card { background: white; border-radius: 12px; padding: 15px; border: 1px solid #eee; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .main-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; }
+        .color-selector { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
+        .color-dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: 0.2s; }
+        .color-dot.active { border-color: var(--primary); transform: scale(1.2); }
+        
         .card-price { color: var(--success); font-weight: 800; font-size: 20px; margin: 10px 0; }
         .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
         .cart-btn-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1500; border: 2px solid var(--accent); }
-        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; }
+        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; box-shadow: 2px 0 10px rgba(0,0,0,0.2); }
         #cart-panel.active { left: 0; }
     </style>
 </head>
@@ -51,7 +70,9 @@
 </div>
 
 <header>
-    <div class="logo-box"><div class="logo-content">GUJRAT HARDWARE</div></div>
+    <div class="logo-box">
+        <div class="logo-content">GUJRAT HARDWARE</div>
+    </div>
 </header>
 
 <div class="hero">
@@ -60,7 +81,7 @@
 </div>
 
 <div class="category-bar">
-    <a href="index.html" class="cat-item active">
+    <a href="#" class="cat-item active">
         <div class="cat-icon"><i class="fas fa-layer-group"></i></div>
         <span>شیٹس</span>
     </a>
@@ -85,10 +106,18 @@
 <div class="container">
     <div class="grid">
         <div class="card">
-            <img class="main-img" src="https://img.icons8.com/color/144/surface.png">
-            <h3>UV پریمیم شیٹ</h3>
+            <img id="sheet-display" class="main-img" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=500&auto=format&fit=crop" alt="UV Sheet">
+            <h3 id="sheet-title">UV پریمیم شیٹ (سفید)</h3>
+            
+            <p style="font-size: 12px; color: #666; margin-bottom: 5px;">رنگ منتخب کریں:</p>
+            <div class="color-selector">
+                <div class="color-dot active" style="background: #ffffff; border: 1px solid #ddd;" onclick="changeSheet('سفید', 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=500&auto=format&fit=crop', this)"></div>
+                <div class="color-dot" style="background: #2c3e50;" onclick="changeSheet('گرے', 'https://images.unsplash.com/photo-1513519247481-84a22c637559?q=80&w=500&auto=format&fit=crop', this)"></div>
+                <div class="color-dot" style="background: #5d4037;" onclick="changeSheet('براؤن ووڈ', 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=500&auto=format&fit=crop', this)"></div>
+            </div>
+
             <div class="card-price">Rs. 8,500</div>
-            <button class="btn-add" onclick="addToCart('UV Sheet', 8500)">کارٹ میں ڈالیں</button>
+            <button class="btn-add" onclick="addSheetToCart()">کارٹ میں ڈالیں</button>
         </div>
     </div>
 </div>
@@ -110,14 +139,38 @@
 
 <script>
     let cart = JSON.parse(localStorage.getItem('gujrat_hardware_cart')) || [];
+    let selectedColor = "سفید";
+    let selectedPrice = 8500;
+
     window.onload = function() { updateUI(); };
+
     function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
+
+    // Change Sheet Logic
+    function changeSheet(color, imgUrl, element) {
+        selectedColor = color;
+        document.getElementById('sheet-display').src = imgUrl;
+        document.getElementById('sheet-title').innerText = `UV پریمیم شیٹ (${color})`;
+        
+        // Update active dot
+        document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    function addSheetToCart() {
+        let fullName = `UV Sheet (${selectedColor})`;
+        addToCart(fullName, selectedPrice);
+    }
+
     function addToCart(name, price) {
         let item = cart.find(i => i.name === name);
         item ? item.quantity++ : cart.push({name, price, quantity: 1});
         localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
         updateUI();
+        // Optional: Open cart automatically when item added
+        // toggleCart(); 
     }
+
     function updateUI() {
         const list = document.getElementById('cart-list');
         let total = 0; let count = 0;
@@ -125,23 +178,29 @@
         cart.forEach((item, index) => {
             total += (item.price * item.quantity);
             count += item.quantity;
-            list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
-                <span>${item.name} x ${item.quantity}</span>
-                <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                <div style="text-align:right;">
+                    <div style="font-weight:bold; font-size:14px;">${item.name}</div>
+                    <div style="font-size:12px; color:var(--success);">Rs. ${item.price} x ${item.quantity}</div>
+                </div>
+                <i class="fas fa-trash" style="color:red; cursor:pointer; padding:10px;" onclick="removeFromCart(${index})"></i>
             </div>`;
         });
         document.getElementById('count').innerText = count;
         document.getElementById('total').innerText = "ٹوٹل بل: Rs. " + total.toLocaleString();
     }
+
     function removeFromCart(index) {
         cart.splice(index, 1);
         localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
         updateUI();
     }
+
     function sendWhatsApp() {
         if(cart.length === 0) return alert("کارٹ خالی ہے!");
-        let text = "*گجرات ہارڈ ویئر - آرڈر*%0A";
-        cart.forEach(item => text += `• ${item.name} (${item.quantity})%0A`);
+        let text = "*گجرات ہارڈ ویئر - نیا آرڈر*%0A%0A";
+        cart.forEach(item => text += `• *${item.name}* %0A   مقدار: ${item.quantity} %0A`);
+        text += `%0A*ٹوٹل بل:* ${document.getElementById('total').innerText}`;
         window.open(`https://wa.me/923130781469?text=${text}`, '_blank');
     }
 </script>
