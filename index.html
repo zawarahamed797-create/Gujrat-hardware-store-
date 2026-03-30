@@ -3,238 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>گجرات ہارڈ ویئر اینڈ سروسز - فیوچر ریڈی سٹور</title>
+    <title>گجرات کچن ہارڈ ویئر - ماڈیولر کچن اسپیشلسٹ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #fb8c00; /* اورنج - ہارڈ ویئر کی پہچان */
-            --secondary: #263238; /* گہرا گرے - مضبوطی کی علامت */
-            --accent: #00c853; /* سبز - واٹس ایپ اور بھروسہ */
-            --bg-light: #fdfdfd;
+            --gold: #d4af37; /* لگژری کچن ہینڈلز کا رنگ */
+            --dark-grey: #2c3e50; 
+            --premium-black: #1a1a1a;
+            --soft-grey: #f4f4f4;
         }
 
         body {
-            font-family: 'Segoe UI', 'system-ui', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: var(--bg-light);
-            color: var(--secondary);
+            background-color: white;
+            color: var(--premium-black);
             text-align: right;
-            scroll-behavior: smooth;
+            line-height: 1.6;
         }
 
-        /* Header Animation */
+        /* Top Info Bar */
+        .top-info {
+            background: var(--premium-black);
+            color: var(--gold);
+            padding: 8px 10%;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Luxury Header */
         header {
-            background: white;
-            padding: 15px 8%;
+            padding: 20px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-bottom: 2px solid var(--soft-grey);
             position: sticky;
             top: 0;
+            background: white;
             z-index: 1000;
         }
 
-        .brand { display: flex; align-items: center; gap: 15px; }
-        .brand i { font-size: 2.5rem; color: var(--primary); }
-        .brand h1 { margin: 0; font-size: 1.6rem; letter-spacing: 1px; }
+        .logo-box h1 { margin: 0; font-size: 1.8rem; color: var(--dark-grey); }
+        .logo-box span { color: var(--gold); font-weight: bold; }
 
-        /* Floating WhatsApp for 24/7 Support */
-        .float-wa {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--accent);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        /* Modern Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 450px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 10px 20px rgba(0,200,83,0.3);
-            z-index: 9999;
-            transition: 0.3s;
-        }
-        .float-wa:hover { transform: scale(1.1) rotate(10deg); }
-
-        /* New: Modern Hero Banner */
-        .hero {
-            height: 500px;
-            background: linear-gradient(45deg, rgba(38, 50, 56, 0.9), rgba(38, 50, 56, 0.5)), 
-                        url('https://images.unsplash.com/photo-1530124560676-41bc173e7a78?q=80&w=1470&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            padding: 0 8%;
             color: white;
-        }
-
-        .hero-content h2 { font-size: 3.5rem; margin: 0; color: var(--primary); }
-        .hero-content p { font-size: 1.4rem; max-width: 600px; line-height: 1.6; }
-
-        /* Future Feature: Services Section */
-        .services-bar {
-            background: var(--secondary);
-            color: white;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
             text-align: center;
         }
-        .s-item i { color: var(--primary); font-size: 1.5rem; margin-bottom: 5px; }
 
-        /* Category Grid */
-        .section { padding: 80px 8%; }
-        .section-title { font-size: 2.5rem; margin-bottom: 50px; border-right: 8px solid var(--primary); padding-right: 20px; }
+        .hero-text h2 { font-size: 3rem; margin-bottom: 10px; color: var(--gold); }
+        .hero-text p { font-size: 1.3rem; margin-bottom: 25px; }
 
-        .category-grid {
+        /* Specialized Categories */
+        .section { padding: 80px 10%; }
+        .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; }
+        .section-title span { color: var(--gold); border-bottom: 3px solid var(--gold); }
+
+        .kitchen-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
-        .cat-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 20px;
+        .kitchen-card {
+            background: var(--soft-grey);
+            border-radius: 15px;
+            padding: 35px 20px;
             text-align: center;
+            transition: 0.3s ease;
             border: 1px solid #eee;
-            transition: 0.4s ease;
         }
-        .cat-card:hover { 
-            border-color: var(--primary); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            transform: translateY(-5px);
-        }
-        .cat-card i { font-size: 4rem; color: var(--primary); margin-bottom: 20px; }
-        .cat-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
 
-        .btn-order {
+        .kitchen-card:hover { 
+            background: white; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--gold);
+        }
+
+        .kitchen-card i { font-size: 3.5rem; color: var(--dark-grey); margin-bottom: 20px; }
+        .kitchen-card h3 { color: var(--premium-black); font-size: 1.5rem; }
+
+        /* Price Inquiry Button */
+        .wa-btn {
             display: inline-block;
             margin-top: 15px;
-            padding: 12px 30px;
-            border: 2px solid var(--primary);
-            color: var(--primary);
+            padding: 10px 25px;
+            background: #25D366;
+            color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
             transition: 0.3s;
         }
-        .btn-order:hover { background: var(--primary); color: white; }
 
-        /* Trust Badges */
-        .trust-section { background: #f0f2f5; padding: 60px 8%; text-align: center; }
-        .badges { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 30px; }
-        .badge-item { font-weight: bold; color: #555; }
-        .badge-item i { display: block; font-size: 2.5rem; margin-bottom: 10px; color: var(--secondary); }
+        /* Future Feature: Expert Advice */
+        .expert-advice {
+            background: var(--dark-grey);
+            color: white;
+            padding: 50px 10%;
+            text-align: center;
+            border-radius: 0;
+        }
 
-        footer { background: var(--secondary); color: white; padding: 40px 8%; text-align: center; }
+        /* Footer */
+        footer {
+            background: var(--premium-black);
+            color: #888;
+            padding: 40px 10%;
+            text-align: center;
+        }
+
+        /* Floating Contact */
+        .floating-contact {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 2000;
+        }
 
         @media (max-width: 768px) {
-            .hero-content h2 { font-size: 2.2rem; }
-            .hero-content p { font-size: 1.1rem; }
+            .hero-text h2 { font-size: 2rem; }
+            header { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
 <body>
 
-<a href="https://wa.me/923001234567" class="float-wa" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+<div class="top-info">
+    <span><i class="fas fa-map-marker-alt"></i> مین مارکیٹ، گجرات (کچن ہارڈ ویئر اسپیشلسٹ)</span>
+    <span><i class="fas fa-phone-alt"></i> 0300-1234567</span>
+</div>
 
 <header>
-    <div class="brand">
-        <i class="fas fa-tools"></i>
-        <div>
-            <h1>گجرات ہارڈ ویئر</h1>
-            <small style="color: #888;">کوالٹی پر کوئی سمجھوتہ نہیں</small>
-        </div>
+    <div class="logo-box">
+        <h1>گجرات <span>کچن ہارڈ ویئر</span></h1>
     </div>
-    <div class="contact-info">
-        <span style="font-weight: bold;"><i class="fas fa-phone-alt" style="color: var(--primary);"></i> 0300-1234567</span>
-    </div>
+    <a href="https://wa.me/923001234567" class="wa-btn"><i class="fab fa-whatsapp"></i> واٹس ایپ آرڈر</a>
 </header>
 
 <section class="hero">
-    <div class="hero-content">
-        <h2>تعمیرِ نو کا ہم سفر</h2>
-        <p>گجرات کا سب سے بڑا ہارڈ ویئر سٹور جہاں آپ کو ملیں گے دنیا کے بہترین برانڈز، وہ بھی ہول سیل ریٹ پر۔</p>
-        <a href="#store" class="btn-order" style="background: var(--primary); color: white; border: none;">سامان کی فہرست دیکھیں</a>
+    <div class="hero-text">
+        <h2>اپنے کچن کو جدید بنائیں</h2>
+        <p>کچن الماری کے تمام امپورٹڈ ہینڈلز، قلابے اور جدید باسکٹ دستیاب ہیں</p>
+        <a href="#products" class="wa-btn" style="background: var(--gold);">ہمارا کیٹلاگ دیکھیں</a>
     </div>
 </section>
 
-<div class="services-bar">
-    <div class="s-item"><i class="fas fa-shipping-fast"></i><p>فوری ہوم ڈلیوری</p></div>
-    <div class="s-item"><i class="fas fa-user-cog"></i><p>پلمبر و الیکٹریشن دستیاب</p></div>
-    <div class="s-item"><i class="fas fa-shield-alt"></i><p>100% اصل برانڈز</p></div>
-    <div class="s-item"><i class="fas fa-undo"></i><p>آسان واپسی کی پالیسی</p></div>
-</div>
-
-<section class="section" id="store">
-    <h2 class="section-title">ہماری <span>کیٹیگریز</span></h2>
-    <div class="category-grid">
-        <div class="cat-card">
-            <i class="fas fa-paint-brush"></i>
-            <h3>پینٹس اور ڈیکور</h3>
-            <p>ماسٹر، جوٹن اور برجر پینٹس کے تمام شیڈز اور ورائٹی۔</p>
-            <a href="https://wa.me/923001234567?text=Paint Rate" class="btn-order">ریٹ چیک کریں</a>
+<section class="section" id="products">
+    <h2 class="section-title">ہماری <span>اسپیشلٹیز</span></h2>
+    <div class="kitchen-grid">
+        <div class="kitchen-card">
+            <i class="fas fa-sign-out-alt"></i>
+            <h3>پل آؤٹ باسکٹس</h3>
+            <p>سٹیل کی پلیٹ ریک، کٹلری ٹرے اور کارنر باسکٹس۔</p>
+            <a href="https://wa.me/923001234567?text=Kitchen Basket Price" class="wa-btn">قیمت پوچھیں</a>
         </div>
-        <div class="cat-card">
-            <i class="fas fa-plug"></i>
-            <h3>الیکٹرک فٹنگ</h3>
-            <p>وائرز، سوئچ بورڈز اور ایل ای ڈی لائٹس کا مکمل سٹاک۔</p>
-            <a href="https://wa.me/923001234567?text=Electric Item Rate" class="btn-order">ریٹ چیک کریں</a>
+        <div class="kitchen-card">
+            <i class="fas fa-door-closed"></i>
+            <h3>سوفٹ کلوز قلابے</h3>
+            <p>آہستہ اور خاموشی سے بند ہونے والے جدید ہائیڈرولک قلابے (Hinges)۔</p>
+            <a href="https://wa.me/923001234567?text=Kitchen Hinges Price" class="wa-btn">قیمت پوچھیں</a>
         </div>
-        <div class="cat-card">
-            <i class="fas fa-shower"></i>
-            <h3>سینیٹری اور باتھ</h3>
-            <p>جدید ڈیزائن کی ٹونٹیاں، پائپس اور واش روم اسیسریز۔</p>
-            <a href="https://wa.me/923001234567?text=Sanitary Rate" class="btn-order">ریٹ چیک کریں</a>
+        <div class="kitchen-card">
+            <i class="fas fa-grip-lines-vertical"></i>
+            <h3>لگزری ہینڈلز</h3>
+            <p>گولڈن، اینٹیک، اور بلیک فنش میں کچن الماری کے نفیس ہینڈلز۔</p>
+            <a href="https://wa.me/923001234567?text=Cabinet Handles" class="wa-btn">قیمت پوچھیں</a>
         </div>
-        <div class="cat-card">
-            <i class="fas fa-hammer"></i>
-            <h3>تعمیراتی ٹولز</h3>
-            <p>تعمیراتی کام کے لیے درکار تمام چھوٹے بڑے اوزار۔</p>
-            <a href="https://wa.me/923001234567?text=Tools Rate" class="btn-order">ریٹ چیک کریں</a>
+        <div class="kitchen-card">
+            <i class="fas fa-window-maximize"></i>
+            <h3>چینل اور سلائیڈرز</h3>
+            <p>کچن درازوں کے لیے مضبوط ٹیلیسکوپک چینلز اور سوفٹ کلوز ریلنگ۔</p>
+            <a href="https://wa.me/923001234567?text=Drawer Slides" class="wa-btn">قیمت پوچھیں</a>
         </div>
     </div>
 </section>
 
-<section class="trust-section">
-    <h2>گجرات کا قابلِ اعتماد ادارہ</h2>
-    <p>پچھلے 15 سالوں سے ہم اپنے گاہکوں کا بھروسہ جیت رہے ہیں۔</p>
-    <div class="badges">
-        <div class="badge-item"><i class="fas fa-award"></i> تصدیق شدہ ڈیلر</div>
-        <div class="badge-item"><i class="fas fa-users"></i> 10,000+ مطمئن گاہک</div>
-        <div class="badge-item"><i class="fas fa-city"></i> گجرات کی پہچان</div>
+<section class="expert-advice">
+    <h2>کچن پیمائش اور سامان کی لسٹ؟</h2>
+    <p>اگر آپ نیا کچن بنوا رہے ہیں تو ہمیں واٹس ایپ پر نقشہ بھیجیں، ہم آپ کو سامان کی لسٹ اور تخمینہ (Quotation) بنا کر دیں گے۔</p>
+    <a href="https://wa.me/923001234567" class="wa-btn" style="background: white; color: var(--premium-black);">مفت مشورہ لیں</a>
+</section>
+
+<section class="section">
+    <h2 class="section-title">ہم کیوں؟</h2>
+    <div class="kitchen-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+        <div style="text-align: center;">
+            <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--gold);"></i>
+            <h4>10 سال وارنٹی</h4>
+            <p>زنگ نہ لگنے کی گارنٹی</p>
+        </div>
+        <div style="text-align: center;">
+            <i class="fas fa-truck" style="font-size: 2.5rem; color: var(--gold);"></i>
+            <h4>پورے پاکستان میں ڈلیوری</h4>
+            <p>محفوظ پیکنگ کے ساتھ</p>
+        </div>
+        <div style="text-align: center;">
+            <i class="fas fa-check-double" style="font-size: 2.5rem; color: var(--gold);"></i>
+            <h4>اصل برانڈز</h4>
+            <p>صرف کوالٹی کا سامان</p>
+        </div>
     </div>
 </section>
 
 <footer>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: right; margin-bottom: 30px;">
-        <div>
-            <h3>پتہ</h3>
-            <p>مین جی ٹی روڈ، نزد لاری اڈا، گجرات</p>
-        </div>
-        <div>
-            <h3>رابطہ</h3>
-            <p>فون: 0300-1234567</p>
-            <p>ای میل: info@gujrathardware.com</p>
-        </div>
-        <div>
-            <h3>سوشل میڈیا</h3>
-            <p>فیس بک | انسٹاگرام</p>
-        </div>
-    </div>
-    <hr style="opacity: 0.1;">
-    <p>© 2026-2036 گجرات ہارڈ ویئر سٹور | تمام جملہ حقوق محفوظ ہیں</p>
+    <p>© 2026-2036 گجرات کچن ہارڈ ویئر اسپیشلسٹ</p>
+    <p>ایڈریس: مین ہارڈ ویئر مارکیٹ، گجرات، پنجاب</p>
 </footer>
+
+<a href="tel:+923001234567" class="floating-contact">
+    <i class="fas fa-phone-alt"></i> کال کریں
+</a>
 
 </body>
 </html>
-
