@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #1a2a3a; --accent: #c5a059; --bg: #fdfaf5; --success: #27ae60; --dark: #111; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; width: 100%; }
         
         /* Scrolling Ticker */
         .ticker-wrap { background: var(--accent); color: white; padding: 8px 0; font-weight: bold; overflow: hidden; white-space: nowrap; position: relative; z-index: 1001; }
@@ -25,10 +25,10 @@
         /* Hero Banner */
         .hero { 
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1470&auto=format&fit=crop'); 
-            height: 250px; background-size: cover; background-position: center; 
+            height: 200px; background-size: cover; background-position: center; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
         }
-        .hero h1 { font-size: 30px; margin: 0; color: var(--accent); }
+        .hero h1 { font-size: 26px; margin: 0; color: var(--accent); }
 
         /* Info Boxes */
         .info-container { max-width: 1100px; margin: -40px auto 20px; padding: 0 20px; position: relative; z-index: 10; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -59,17 +59,22 @@
         .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-add:hover { background: var(--accent); }
 
-        /* Floating Cart */
-        .cart-btn-float { position: fixed; bottom: 30px; left: 30px; background: var(--primary); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1500; box-shadow: 0 8px 25px rgba(0,0,0,0.3); font-size: 24px; border: 2px solid var(--accent); }
-        .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent); color: white; width: 25px; height: 25px; border-radius: 50%; font-size: 12px; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+        /* Floating Cart Button */
+        .cart-btn-float { position: fixed; bottom: 30px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1500; box-shadow: 0 8px 25px rgba(0,0,0,0.3); font-size: 24px; border: 2px solid var(--accent); }
+        .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; display: flex; justify-content: center; align-items: center; font-weight: bold; }
 
-        /* Cart Panel - Fixed Left Sidebar Issue */
-        #cart-panel { position: fixed; left: -110%; top: 0; width: 350px; height: 100%; background: white; box-shadow: 10px 0 30px rgba(0,0,0,0.2); transition: 0.4s ease-in-out; z-index: 2000; padding: 20px; display: flex; flex-direction: column; box-sizing: border-box; visibility: hidden; }
-        #cart-panel.active { left: 0; visibility: visible; }
+        /* Cart Panel Fix for Mobile */
+        #cart-panel { position: fixed; left: -105%; top: 0; width: 320px; height: 100%; background: white; box-shadow: 5px 0 20px rgba(0,0,0,0.3); transition: 0.4s ease-in-out; z-index: 2000; padding: 20px; display: flex; flex-direction: column; box-sizing: border-box; }
+        #cart-panel.active { left: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
         .whatsapp-btn { background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 18px; border: none; cursor: pointer; width: 100%; margin-top: auto; }
 
-        @media (max-width: 600px) { header { flex-direction: column; gap: 10px; } .search-container { width: 100%; } #cart-panel { width: 100%; } }
+        @media (max-width: 600px) { 
+            header { flex-direction: column; gap: 10px; padding: 10px; } 
+            .search-container { width: 100%; margin: 5px 0; } 
+            #cart-panel { width: 85%; } 
+            .hero h1 { font-size: 22px; }
+        }
     </style>
 </head>
 <body>
@@ -178,7 +183,10 @@
     let cart = [];
     let selectedColorsMap = {}; 
 
-    function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
+    // صرف بٹن دبانے پر کارٹ کھلے گا یا بند ہوگا
+    function toggleCart() { 
+        document.getElementById('cart-panel').classList.toggle('active'); 
+    }
 
     function updateProduct(colorName, colorHex, imgId, textId) {
         document.getElementById(textId).innerText = "منتخب رنگ: " + colorName;
@@ -195,7 +203,7 @@
         let item = cart.find(i => i.name === name);
         item ? item.quantity++ : cart.push({name, price, quantity: 1});
         updateUI();
-        if(!document.getElementById('cart-panel').classList.contains('active')) toggleCart();
+        // یہاں سے خودبخود کارٹ کھولنے والا فنکشن ہٹا دیا گیا ہے
     }
 
     function updateUI() {
@@ -206,8 +214,8 @@
             total += (item.price * item.quantity);
             itemsCount += item.quantity;
             list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
-                <div><b>${item.name}</b><br><small>${item.quantity} x ${item.price}</small></div>
-                <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+                <div style="text-align:right"><b>${item.name}</b><br><small>${item.quantity} x ${item.price}</small></div>
+                <i class="fas fa-trash" style="color:red; cursor:pointer; padding:5px;" onclick="removeFromCart(${index})"></i>
             </div>`;
         });
         document.getElementById('count').innerText = itemsCount;
