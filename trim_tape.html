@@ -11,15 +11,28 @@
         body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; width: 100%; }
         
         .ticker-wrap { background: var(--accent); color: white; padding: 8px 0; font-weight: bold; overflow: hidden; white-space: nowrap; position: relative; z-index: 1001; }
-        .ticker { display: inline-block; animation: marquee 25s linear infinite; direction: ltr; }
-        @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .ticker { display: inline-block; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         header { background: var(--primary); color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .logo-box { position: relative; padding: 10px 25px; display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 50px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.4); }
-        .logo-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, transparent, var(--accent)); animation: rotateLight 3s linear infinite; z-index: 1; }
-        .logo-box::after { content: ''; position: absolute; inset: 2px; background: var(--primary); border-radius: 50px; z-index: 2; }
-        @keyframes rotateLight { 100% { transform: rotate(360deg); } }
-        .logo-content { position: relative; z-index: 3; text-decoration: none; color: var(--accent); font-weight: 900; font-size: 18px; }
+        
+        /* Logo in One Line with Pulse/Glow Animation */
+        .logo-box { 
+            position: relative; 
+            padding: 8px 20px; 
+            display: flex; 
+            align-items: center; 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 50px; 
+            border: 2px solid var(--accent);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+            white-space: nowrap;
+        }
+        @keyframes logoGlow {
+            from { box-shadow: 0 0 5px var(--accent); transform: scale(1); }
+            to { box-shadow: 0 0 15px var(--accent); transform: scale(1.02); }
+        }
+        .logo-content { text-decoration: none; color: var(--accent); font-weight: 900; font-size: clamp(16px, 5vw, 22px); letter-spacing: 1px; }
 
         .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1470&auto=format&fit=crop'); height: 160px; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
         .hero h1 { font-size: 24px; margin: 0; color: var(--accent); }
@@ -34,28 +47,36 @@
         .container { padding: 15px; }
         .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 480px) { .grid { grid-template-columns: 1fr 1fr; } }
-        .card { background: white; border-radius: 12px; padding: 15px; border: 1px solid #eee; text-align: center; }
-        .main-img { width: 100%; height: 150px; object-fit: contain; }
+        
+        .card { background: white; border-radius: 12px; padding: 15px; border: 1px solid #eee; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .main-img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; }
         .card-price { color: var(--success); font-weight: 800; font-size: 20px; margin: 10px 0; }
         .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
+        /* Cart Floating Button */
         .cart-btn-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1500; border: 2px solid var(--accent); }
-        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; }
+        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; box-shadow: 2px 0 10px rgba(0,0,0,0.2); }
         #cart-panel.active { left: 0; }
+
+        /* Qty Controls in Cart */
+        .qty-box { display: flex; align-items: center; gap: 10px; background: #f0f0f0; padding: 5px 10px; border-radius: 5px; }
+        .qty-btn { cursor: pointer; color: var(--primary); font-weight: bold; font-size: 18px; }
     </style>
 </head>
 <body>
 
 <div class="ticker-wrap">
-    <div class="ticker">GUJRAT HARDWARE STORE: PREMIUM KITCHEN SHEETS & ACCESSORIES | CONTACT: 03130781469 🚀</div>
+    <div class="ticker">GUJRAT HARDWARE STORE: PREMIUM KITCHEN SHEETS & ACCESSORIES | CONTACT: 03130781469 | DELIVERY AVAILABLE 🚀</div>
 </div>
 
 <header>
-    <div class="logo-box"><div class="logo-content">GUJRAT HARDWARE</div></div>
+    <div class="logo-box">
+        <div class="logo-content">GUJRAT HARDWARE STORE</div>
+    </div>
 </header>
 
 <div class="hero">
-    <h1>گجرات کچن ہارڈ ویئر</h1>
+    <h1>گجرات ہارڈ ویئر سٹور</h1>
     <p>منڈی بہاؤالدین</p>
 </div>
 
@@ -111,13 +132,26 @@
 <script>
     let cart = JSON.parse(localStorage.getItem('gujrat_hardware_cart')) || [];
     window.onload = function() { updateUI(); };
+
     function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
+
     function addToCart(name, price) {
-        let item = cart.find(i => i.name === name);
-        item ? item.quantity++ : cart.push({name, price, quantity: 1});
+        let existing = cart.find(i => i.name === name);
+        existing ? existing.quantity++ : cart.push({name, price, quantity: 1});
+        saveAndUpdate();
+    }
+
+    function updateQty(index, delta) {
+        cart[index].quantity += delta;
+        if(cart[index].quantity < 1) cart.splice(index, 1);
+        saveAndUpdate();
+    }
+
+    function saveAndUpdate() {
         localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
         updateUI();
     }
+
     function updateUI() {
         const list = document.getElementById('cart-list');
         let total = 0; let count = 0;
@@ -125,23 +159,27 @@
         cart.forEach((item, index) => {
             total += (item.price * item.quantity);
             count += item.quantity;
-            list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
-                <span>${item.name} x ${item.quantity}</span>
-                <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:8px;">
+                <div style="text-align:right; flex:1;">
+                    <div style="font-weight:bold; font-size:14px;">${item.name}</div>
+                    <div style="font-size:12px; color:var(--success);">Rs. ${item.price.toLocaleString()}</div>
+                </div>
+                <div class="qty-box">
+                    <span class="qty-btn" onclick="updateQty(${index}, 1)">+</span>
+                    <span>${item.quantity}</span>
+                    <span class="qty-btn" onclick="updateQty(${index}, -1)">-</span>
+                </div>
             </div>`;
         });
         document.getElementById('count').innerText = count;
         document.getElementById('total').innerText = "ٹوٹل بل: Rs. " + total.toLocaleString();
     }
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
-        updateUI();
-    }
+
     function sendWhatsApp() {
         if(cart.length === 0) return alert("کارٹ خالی ہے!");
-        let text = "*گجرات ہارڈ ویئر - آرڈر*%0A";
-        cart.forEach(item => text += `• ${item.name} (${item.quantity})%0A`);
+        let text = "*گجرات ہارڈ ویئر - نیا آرڈر*%0A%0A";
+        cart.forEach(item => text += `• *${item.name}*%0A   تعداد: ${item.quantity}%0A   قیمت: Rs ${item.price * item.quantity}%0A%0A`);
+        text += `*ٹوٹل بل:* ${document.getElementById('total').innerText}`;
         window.open(`https://wa.me/923130781469?text=${text}`, '_blank');
     }
 </script>
