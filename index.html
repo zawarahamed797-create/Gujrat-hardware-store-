@@ -15,76 +15,26 @@
         .ticker { display: inline-block; animation: marquee 25s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-        /* Header & NEW Animated Hardware Logo */
+        /* Header */
         header { background: var(--primary); color: white; padding: 15px; display: flex; flex-direction: column; align-items: center; position: sticky; top: 0; z-index: 1000; gap: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
         
         .logo-box {
-            position: relative;
-            padding: 10px 25px;
-            display: flex;
-            align-items: center;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50px;
-            overflow: hidden;
-            border: 1px solid rgba(197, 160, 89, 0.4);
+            position: relative; padding: 10px 25px; display: flex; align-items: center;
+            background: rgba(255,255,255,0.05); border-radius: 50px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.4);
         }
 
         .logo-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(transparent, transparent, transparent, var(--accent));
-            animation: rotateLight 3s linear infinite;
-            z-index: 1;
+            animation: rotateLight 3s linear infinite; z-index: 1;
         }
         
-        .logo-box::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: var(--primary);
-            border-radius: 50px;
-            z-index: 2;
-        }
+        .logo-box::after { content: ''; position: absolute; inset: 2px; background: var(--primary); border-radius: 50px; z-index: 2; }
+        @keyframes rotateLight { 100% { transform: rotate(360deg); } }
 
-        @keyframes rotateLight {
-            100% { transform: rotate(360deg); }
-        }
-
-        .logo-content {
-            position: relative;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 900;
-            font-size: 18px;
-            letter-spacing: 0.5px;
-        }
-
-        .tools-icon {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-        }
-
-        .tools-icon .fa-tools {
-            font-size: 20px;
-            animation: toolShake 2s infinite ease-in-out;
-        }
-
-        @keyframes toolShake {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(20deg) scale(1.1); }
-        }
+        .logo-content { position: relative; z-index: 3; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--accent); font-weight: 900; font-size: 18px; letter-spacing: 0.5px; }
+        .tools-icon .fa-tools { font-size: 20px; animation: toolShake 2s infinite ease-in-out; }
+        @keyframes toolShake { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(20deg) scale(1.1); } }
 
         .search-container { width: 100%; position: relative; z-index: 3; }
         .search-container input { width: 100%; padding: 10px 35px 10px 15px; border-radius: 20px; border: none; outline: none; font-size: 14px; text-align: right; }
@@ -94,8 +44,26 @@
         .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1470&auto=format&fit=crop'); height: 150px; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
         .hero h1 { font-size: 22px; margin: 0; color: var(--accent); }
 
+        /* NEW Category Section */
+        .category-bar {
+            display: flex; overflow-x: auto; gap: 15px; padding: 20px 15px; background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); scrollbar-width: none; -ms-overflow-style: none;
+        }
+        .category-bar::-webkit-scrollbar { display: none; }
+        .cat-item {
+            flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            text-decoration: none; color: var(--primary); min-width: 80px;
+        }
+        .cat-icon {
+            width: 55px; height: 55px; background: #f0f4f8; border-radius: 15px;
+            display: flex; align-items: center; justify-content: center; font-size: 20px;
+            color: var(--accent); border: 1px solid #e0e0e0; transition: 0.3s;
+        }
+        .cat-item:active .cat-icon { transform: scale(0.9); background: var(--accent); color: white; }
+        .cat-item span { font-size: 12px; font-weight: bold; }
+
         /* Info Boxes */
-        .info-container { padding: 15px; margin-top: -30px; display: grid; gap: 15px; position: relative; z-index: 10; }
+        .info-container { padding: 15px; margin-top: 10px; display: grid; gap: 15px; position: relative; z-index: 10; }
         .info-box { background: #fff; border-top: 4px solid var(--accent); padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .info-header { font-weight: 800; color: var(--primary); margin-bottom: 10px; font-size: 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
         .driver-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -111,27 +79,18 @@
         .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; }
         .main-img { width: 100%; height: 200px; object-fit: cover; background: #fafafa; }
         .card-body { padding: 15px; }
-        
         .thumb-options { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
         .thumb-img { width: 45px; height: 45px; border-radius: 8px; cursor: pointer; border: 2px solid #ddd; object-fit: cover; transition: 0.2s; }
         .thumb-img.active { border-color: var(--accent); transform: scale(1.1); }
         .selected-text { font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 8px; }
-
         .card-price { color: var(--success); font-weight: 800; font-size: 20px; margin: 10px 0; }
         .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; }
 
-        /* Cart Floating Button */
+        /* Cart UI */
         .cart-btn-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,0,0,0.3); font-size: 24px; border: 2px solid var(--accent); }
         .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; display: flex; justify-content: center; align-items: center; font-weight: bold; }
-
-        /* Cart Panel */
-        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; box-shadow: 5px 0 25px rgba(0,0,0,0.3); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding: 20px; display: flex; flex-direction: column; }
+        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; box-shadow: 5px 0 25px rgba(0,0,0,0.3); transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; }
         #cart-panel.active { left: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
-        #cart-list { flex-grow: 1; overflow-y: auto; margin: 15px 0; }
-        
-        /* Payment System UI */
-        .payment-alert { background: #fff3cd; color: #856404; padding: 10px; border-radius: 8px; font-size: 12px; margin-bottom: 10px; border: 1px solid #ffeeba; text-align: center; }
         .whatsapp-btn { background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 18px; border: none; width: 100%; margin-top: auto; }
     </style>
 </head>
@@ -144,9 +103,7 @@
 <header>
     <div class="logo-box">
         <a href="#" class="logo-content">
-            <div class="tools-icon">
-                <i class="fas fa-tools"></i>
-            </div>
+            <div class="tools-icon"><i class="fas fa-tools"></i></div>
             <span>GUJRAT HARDWARE</span>
         </a>
     </div>
@@ -161,6 +118,29 @@
     <p>منڈی بہاؤالدین کی نمبر 1 ہارڈ ویئر شاپ</p>
 </div>
 
+<div class="category-bar">
+    <a href="#sheets" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-layer-group"></i></div>
+        <span>شیٹس (Sheets)</span>
+    </a>
+    <a href="#trim" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-cut"></i></div>
+        <span>ٹرم و ٹیپ</span>
+    </a>
+    <a href="#hardware" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-door-open"></i></div>
+        <span>ہارڈ ویئر</span>
+    </a>
+    <a href="#accessories" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-blender"></i></div>
+        <span>ایکسیسریز</span>
+    </a>
+    <a href="#tools" class="cat-item">
+        <div class="cat-icon"><i class="fas fa-hammer"></i></div>
+        <span>ٹولز (Tools)</span>
+    </a>
+</div>
+
 <div class="info-container">
     <div class="info-box">
         <div class="info-header"><i class="fas fa-truck"></i> ٹرانسپورٹ ڈلیوری</div>
@@ -172,35 +152,21 @@
 </div>
 
 <div class="container">
-    <div class="section-title">کچن شیٹ کلیکشن</div>
+    <div class="section-title" id="sheets">کچن کلیکشن</div>
     <div class="grid" id="productGrid">
-        
         <div class="card product-item" data-name="یو وی شیٹ uv sheet">
-            <img id="mainDisplay" class="main-img" src="https://img.icons8.com/color/144/surface.png" alt="Sheet">
+            <img id="mainDisplay" class="main-img" src="https://img.icons8.com/color/144/surface.png">
             <div class="card-body">
                 <h3>پریمیم یو وی شیٹ</h3>
                 <div class="selected-text" id="selectedLabel">منتخب ڈیزائن: ڈیفالٹ</div>
-                
                 <div class="thumb-options">
-                    <img class="thumb-img active" src="تصویر_1" onclick="updateDesign('سلور ووڈ 501', this.src, 'mainDisplay', 'selectedLabel', this)" title="501">
-                    <img class="thumb-img" src="تصویر_2" onclick="updateDesign('گولڈن ڈیزائن 502', this.src, 'mainDisplay', 'selectedLabel', this)" title="502">
-                    <img class="thumb-img" src="تصویر_3" onclick="updateDesign('وائٹ ماربل 503', this.src, 'mainDisplay', 'selectedLabel', this)" title="503">
+                    <img class="thumb-img active" src="تصویر_1" onclick="updateDesign('سلور 501', this.src, 'mainDisplay', 'selectedLabel', this)">
+                    <img class="thumb-img" src="تصویر_2" onclick="updateDesign('گولڈن 502', this.src, 'mainDisplay', 'selectedLabel', this)">
                 </div>
-
                 <div class="card-price">Rs. 8,500</div>
                 <button class="btn-add" onclick="addWithDesign('UV Sheet', 8500, 'selectedLabel')">کارٹ میں ڈالیں</button>
             </div>
         </div>
-
-        <div class="card product-item" data-name="قلابہ hinges">
-            <img class="main-img" src="https://img.icons8.com/color/144/hinges.png">
-            <div class="card-body">
-                <h3>سوفٹ کلوز قلابہ</h3>
-                <div class="card-price">Rs. 580</div>
-                <button class="btn-add" onclick="addToCart('Auto Hinges', 580)">کارٹ میں ڈالیں</button>
-            </div>
-        </div>
-
     </div>
 </div>
 
@@ -210,13 +176,13 @@
 </div>
 
 <div id="cart-panel">
-    <div class="cart-header">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">
         <h2 style="margin:0; font-size:18px;">آپ کا آرڈر</h2>
         <button onclick="toggleCart()" style="border:none; background:none; font-size:30px;">&times;</button>
     </div>
-    <div id="cart-list"></div>
-    <div class="payment-alert">
-        <i class="fas fa-info-circle"></i> آرڈر کنفرم کرنے کے لیے <b>20% ایڈوانس پیمنٹ</b> لازمی ہے۔
+    <div id="cart-list" style="flex-grow: 1; overflow-y: auto; margin: 15px 0;"></div>
+    <div class="payment-alert" style="background:#fff3cd; padding:10px; border-radius:8px; font-size:12px; margin-bottom:10px; text-align:center;">
+        20% ایڈوانس پیمنٹ لازمی ہے۔
     </div>
     <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
         <div style="display: flex; justify-content: space-between; font-weight: bold;">
@@ -224,20 +190,14 @@
             <span>Rs. <span id="total">0</span></span>
         </div>
     </div>
-    <button class="whatsapp-btn" onclick="sendWhatsApp()">
-        <i class="fab fa-whatsapp"></i> واٹس ایپ آرڈر کریں
-    </button>
+    <button class="whatsapp-btn" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> واٹس ایپ آرڈر کریں</button>
 </div>
 
 <script>
-    // کارٹ کو LocalStorage سے لوڈ کرنا (اگر موجود ہے)
     let cart = JSON.parse(localStorage.getItem('gujrat_hardware_cart')) || [];
     let selectedDesignsMap = {};
 
-    // پیج لوڈ ہوتے ہی کارٹ کو اپڈیٹ کریں
-    window.onload = function() {
-        updateUI();
-    };
+    window.onload = function() { updateUI(); };
 
     function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
 
@@ -258,14 +218,11 @@
     function addToCart(name, price) {
         let item = cart.find(i => i.name === name);
         item ? item.quantity++ : cart.push({name, price, quantity: 1});
-        saveCart(); // کارٹ محفوظ کریں
+        saveCart();
         updateUI();
     }
 
-    // کارٹ کو محفوظ کرنے کا فنکشن
-    function saveCart() {
-        localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
-    }
+    function saveCart() { localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart)); }
 
     function updateUI() {
         const list = document.getElementById('cart-list');
@@ -276,18 +233,14 @@
             itemsCount += item.quantity;
             list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:8px;">
                 <div style="text-align:right"><b>${item.name}</b><br><small>${item.quantity} x ${item.price}</small></div>
-                <i class="fas fa-trash" style="color:red; cursor:pointer; padding:5px;" onclick="removeFromCart(${index})"></i>
+                <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
             </div>`;
         });
         document.getElementById('count').innerText = itemsCount;
         document.getElementById('total').innerText = total.toLocaleString();
     }
 
-    function removeFromCart(index) { 
-        cart.splice(index, 1); 
-        saveCart(); // کارٹ محفوظ کریں
-        updateUI(); 
-    }
+    function removeFromCart(index) { cart.splice(index, 1); saveCart(); updateUI(); }
 
     function filterProducts() {
         let input = document.getElementById('searchInput').value.toLowerCase();
@@ -302,10 +255,9 @@
         if(cart.length === 0) return alert("کارٹ خالی ہے!");
         let totalVal = 0;
         cart.forEach(item => totalVal += (item.price * item.quantity));
-        let advance = (totalVal * 0.2).toLocaleString();
-        let text = "*گجرات ہارڈ ویئر منڈی بہاؤالدین - نیا آرڈر*%0A--------------------------%0A";
-        cart.forEach(item => text += `• ${item.name} (تعداد: ${item.quantity})%0A`);
-        text += `--------------------------%0A*ٹوٹل بل:* Rs. ${totalVal.toLocaleString()}%0A*ایڈوانس پیمنٹ (20%):* Rs. ${advance}%0A%0A براہ کرم پیمنٹ ڈیٹیلز شیئر کریں تاکہ آرڈر بک کیا جا سکے۔`;
+        let text = "*گجرات ہارڈ ویئر منڈی بہاؤالدین - آرڈر*%0A";
+        cart.forEach(item => text += `• ${item.name} (${item.quantity})%0A`);
+        text += `*ٹوٹل بل:* Rs. ${totalVal.toLocaleString()}`;
         window.open(`https://wa.me/923130781469?text=${text}`, '_blank');
     }
 </script>
