@@ -15,9 +15,24 @@
         .ticker { display: inline-block; animation: marquee 25s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-        /* Header */
+        /* Header & Animated Logo */
         header { background: var(--primary); color: white; padding: 10px 15px; display: flex; flex-direction: column; align-items: center; position: sticky; top: 0; z-index: 1000; gap: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        .logo { font-size: 18px; font-weight: 900; color: var(--accent); text-decoration: none; }
+        
+        .logo { 
+            font-size: 18px; 
+            font-weight: 900; 
+            color: var(--accent); 
+            text-decoration: none; 
+            animation: logoPulse 2s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes logoPulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); color: #fff; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .search-container { width: 100%; position: relative; }
         .search-container input { width: 100%; padding: 10px 35px 10px 15px; border-radius: 20px; border: none; outline: none; font-size: 14px; text-align: right; }
         .search-container i { position: absolute; right: 12px; top: 12px; color: #888; }
@@ -44,7 +59,6 @@
         .main-img { width: 100%; height: 200px; object-fit: cover; background: #fafafa; }
         .card-body { padding: 15px; }
         
-        /* Thumbnails System */
         .thumb-options { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
         .thumb-img { width: 45px; height: 45px; border-radius: 8px; cursor: pointer; border: 2px solid #ddd; object-fit: cover; transition: 0.2s; }
         .thumb-img.active { border-color: var(--accent); transform: scale(1.1); }
@@ -62,6 +76,19 @@
         #cart-panel.active { left: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
         #cart-list { flex-grow: 1; overflow-y: auto; margin: 15px 0; }
+        
+        /* Advance Payment Alert */
+        .payment-alert {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ffeeba;
+            text-align: center;
+        }
+
         .whatsapp-btn { background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 18px; border: none; width: 100%; margin-top: auto; }
     </style>
 </head>
@@ -105,9 +132,9 @@
                 <div class="selected-text" id="selectedLabel">منتخب ڈیزائن: ڈیفالٹ</div>
                 
                 <div class="thumb-options">
-                    <img class="thumb-img active" src="تصویر_کا_لنک_1" onclick="updateDesign('سلور ووڈ 501', this.src, 'mainDisplay', 'selectedLabel', this)" title="501">
-                    <img class="thumb-img" src="تصویر_کا_لنک_2" onclick="updateDesign('گولڈن ڈیزائن 502', this.src, 'mainDisplay', 'selectedLabel', this)" title="502">
-                    <img class="thumb-img" src="تصویر_کا_لنک_3" onclick="updateDesign('وائٹ ماربل 503', this.src, 'mainDisplay', 'selectedLabel', this)" title="503">
+                    <img class="thumb-img active" src="تصویر_1" onclick="updateDesign('سلور ووڈ 501', this.src, 'mainDisplay', 'selectedLabel', this)" title="501">
+                    <img class="thumb-img" src="تصویر_2" onclick="updateDesign('گولڈن ڈیزائن 502', this.src, 'mainDisplay', 'selectedLabel', this)" title="502">
+                    <img class="thumb-img" src="تصویر_3" onclick="updateDesign('وائٹ ماربل 503', this.src, 'mainDisplay', 'selectedLabel', this)" title="503">
                 </div>
 
                 <div class="card-price">Rs. 8,500</div>
@@ -138,6 +165,12 @@
         <button onclick="toggleCart()" style="border:none; background:none; font-size:30px;">&times;</button>
     </div>
     <div id="cart-list"></div>
+    
+    <div class="payment-alert">
+        <i class="fas fa-info-circle"></i> 
+        آرڈر کنفرم کرنے کے لیے <b>20% ایڈوانس پیمنٹ</b> لازمی ہے۔
+    </div>
+
     <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
         <div style="display: flex; justify-content: space-between; font-weight: bold;">
             <span>ٹوٹل بل:</span>
@@ -162,7 +195,6 @@
         document.getElementById(labelId).innerText = "منتخب ڈیزائن: " + name;
         selectedDesignsMap[labelId] = name;
         
-        // Active Class Handling
         let parent = thumbElement.parentElement;
         parent.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active'));
         thumbElement.classList.add('active');
@@ -177,7 +209,6 @@
         let item = cart.find(i => i.name === name);
         item ? item.quantity++ : cart.push({name, price, quantity: 1});
         updateUI();
-        // نوٹ: یہاں سے آٹو اوپن ہٹا دیا گیا ہے تاکہ گاہک ڈسٹرب نہ ہو
     }
 
     function updateUI() {
@@ -209,9 +240,15 @@
 
     function sendWhatsApp() {
         if(cart.length === 0) return alert("کارٹ خالی ہے!");
+        
+        let totalVal = 0;
+        cart.forEach(item => totalVal += (item.price * item.quantity));
+        let advance = (totalVal * 0.2).toLocaleString(); // 20% Calculation
+
         let text = "*گجرات ہارڈ ویئر منڈی بہاؤالدین - نیا آرڈر*%0A--------------------------%0A";
         cart.forEach(item => text += `• ${item.name} (تعداد: ${item.quantity})%0A`);
-        text += `--------------------------%0A*ٹوٹل بل:* Rs. ${document.getElementById('total').innerText}`;
+        text += `--------------------------%0A*ٹوٹل بل:* Rs. ${totalVal.toLocaleString()}%0A*ایڈوانس پیمنٹ (20%):* Rs. ${advance}%0A%0A براہ کرم پیمنٹ ڈیٹیلز شیئر کریں تاکہ آرڈر بک کیا جا سکے۔`;
+        
         window.open(`https://wa.me/923130781469?text=${text}`, '_blank');
     }
 </script>
