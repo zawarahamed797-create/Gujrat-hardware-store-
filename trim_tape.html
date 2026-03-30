@@ -10,56 +10,50 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; width: 100%; }
         
-        /* Navigation Menu - Har page par asani ke liye */
-        .nav-menu { background: #111e2b; display: flex; justify-content: center; gap: 10px; padding: 10px; position: sticky; top: 0; z-index: 1100; border-bottom: 1px solid var(--accent); overflow-x: auto; white-space: nowrap; }
-        .nav-link { color: white; text-decoration: none; font-size: 13px; font-weight: bold; padding: 5px 12px; border-radius: 20px; border: 1px solid transparent; transition: 0.3s; }
-        .nav-link.active { background: var(--accent); border-color: white; }
-        .nav-link:hover { background: rgba(197, 160, 89, 0.2); }
+        /* Top Navigation Bar */
+        .nav-menu { background: #111e2b; display: flex; justify-content: center; gap: 10px; padding: 10px; position: sticky; top: 0; z-index: 1100; border-bottom: 1px solid var(--accent); overflow-x: auto; }
+        .nav-link { color: white; text-decoration: none; font-size: 13px; font-weight: bold; padding: 6px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); white-space: nowrap; }
+        .nav-link.active { background: var(--accent); border-color: white; color: #111; }
 
-        /* Header */
-        header { background: var(--primary); color: white; padding: 15px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        .logo-box { position: relative; padding: 10px 25px; display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 50px; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.4); }
-        .logo-box::after { content: ''; position: absolute; inset: 2px; background: var(--primary); border-radius: 50px; z-index: 2; }
-        .logo-content { position: relative; z-index: 3; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--accent); font-weight: 900; font-size: 18px; }
+        header { background: var(--primary); color: white; padding: 15px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .logo-box { position: relative; padding: 10px 25px; background: rgba(255,255,255,0.05); border-radius: 50px; border: 1px solid var(--accent); }
+        .logo-content { color: var(--accent); font-weight: 900; font-size: 18px; text-decoration: none; }
 
-        .search-container { width: 100%; position: relative; z-index: 3; padding: 0 15px; }
-        .search-container input { width: 100%; padding: 10px 35px 10px 15px; border-radius: 20px; border: none; outline: none; font-size: 14px; text-align: right; }
-        .search-container i { position: absolute; right: 27px; top: 12px; color: #888; }
+        .search-container { width: 90%; position: relative; }
+        .search-container input { width: 100%; padding: 10px 35px 10px 15px; border-radius: 20px; border: none; outline: none; text-align: right; }
+        .search-container i { position: absolute; right: 12px; top: 12px; color: #888; }
 
-        /* Products Grid */
         .container { padding: 15px; }
         .section-title { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 20px; border-right: 5px solid var(--accent); padding-right: 10px; }
-        .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        
+        /* Grid */
+        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         @media (min-width: 480px) { .grid { grid-template-columns: 1fr 1fr; } }
 
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; }
-        .main-img { width: 100%; height: 180px; object-fit: contain; background: #fff; padding: 10px; }
-        .card-body { padding: 15px; }
-        .card-price { color: var(--success); font-weight: 800; font-size: 20px; margin: 10px 0; }
-        .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; padding: 10px; }
+        .main-img { width: 100%; height: 150px; object-fit: contain; }
+        .card-price { color: var(--success); font-weight: 800; font-size: 18px; margin: 10px 0; }
+        .btn-add { width: 100%; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
         /* Cart Floating UI */
-        .cart-btn-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,0,0,0.3); font-size: 24px; border: 2px solid var(--accent); }
+        .cart-btn-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1500; box-shadow: 0 5px 20px rgba(0,0,0,0.3); border: 2px solid var(--accent); }
         .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; display: flex; justify-content: center; align-items: center; font-weight: bold; }
-        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; box-shadow: 5px 0 25px rgba(0,0,0,0.3); transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; }
+        #cart-panel { position: fixed; left: -105%; top: 0; width: 85%; max-width: 350px; height: 100%; background: white; transition: 0.4s; z-index: 2000; padding: 20px; display: flex; flex-direction: column; box-shadow: 5px 0 25px rgba(0,0,0,0.2); }
         #cart-panel.active { left: 0; }
-        .whatsapp-btn { background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: auto; border: none; width: 100%; }
+        .whatsapp-btn { background: #25D366; color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: auto; border: none; }
     </style>
 </head>
 <body>
 
 <nav class="nav-menu">
-    <a href="index.html" class="nav-link">ہوم پیج</a>
-    <a href="sheets.html" class="nav-link">شیٹس</a>
+    <a href="index.html" class="nav-link">شیٹس (Sheets)</a>
     <a href="trim_tape.html" class="nav-link active">ٹرم و ٹیپ</a>
-    <a href="hardware.html" class="nav-link">ہارڈ ویئر</a>
-    <a href="accessories.html" class="nav-link">ایکسیسریز</a>
+    <a href="#" class="nav-link">ہارڈ ویئر</a>
+    <a href="#" class="nav-link">ایکسیسریز</a>
 </nav>
 
 <header>
-    <div class="logo-box">
-        <div class="logo-content"><span>GUJRAT HARDWARE</span></div>
-    </div>
+    <div class="logo-box"><div class="logo-content">GUJRAT HARDWARE</div></div>
     <div class="search-container">
         <i class="fas fa-search"></i>
         <input type="text" id="searchInput" placeholder="ٹرم یا ٹیپ تلاش کریں..." onkeyup="filterProducts()">
@@ -67,29 +61,24 @@
 </header>
 
 <div class="container">
-    <div class="section-title">ٹرم اور ٹیپ کلیکشن</div>
-    <div class="grid" id="productGrid">
-        
-        <div class="card product-item" data-name="ایلومینیم ٹرم aluminum trim">
+    <div class="section-title">ٹرم اور ٹیپ (Trim & Tape)</div>
+    
+    <div class="grid">
+        <div class="card product-item" data-name="ایلومینیم ٹی ٹرم aluminum t trim">
             <img class="main-img" src="https://img.icons8.com/color/144/aluminum.png">
-            <div class="card-body">
-                <h3>ایلومینیم ٹرم (T-Shape)</h3>
-                <p style="font-size: 12px; color: #666;">سائز: 12mm | چمکدار فنش</p>
-                <div class="card-price">Rs. 450</div>
-                <button class="btn-add" onclick="addToCart('Aluminum Trim 12mm', 450)">کارٹ میں ڈالیں</button>
-            </div>
+            <h3>ایلومینیم T-ٹرم</h3>
+            <p>سائز: 12mm | سلور فنش</p>
+            <div class="card-price">Rs. 450</div>
+            <button class="btn-add" onclick="addToCart('Aluminum T-Trim 12mm', 450)">کارٹ میں ڈالیں</button>
         </div>
 
         <div class="card product-item" data-name="پی وی سی ایج ٹیپ pvc edge tape">
             <img class="main-img" src="https://img.icons8.com/color/144/tape.png">
-            <div class="card-body">
-                <h3>پی وی سی ایج ٹیپ</h3>
-                <p style="font-size: 12px; color: #666;">رول: 50 میٹر | واٹر پروف</p>
-                <div class="card-price">Rs. 1,200</div>
-                <button class="btn-add" onclick="addToCart('PVC Edge Tape', 1200)">کارٹ میں ڈالیں</button>
-            </div>
+            <h3>پی وی سی ایج ٹیپ</h3>
+            <p>50 میٹر رول | واٹر پروف</p>
+            <div class="card-price">Rs. 1,200</div>
+            <button class="btn-add" onclick="addToCart('PVC Edge Tape', 1200)">کارٹ میں ڈالیں</button>
         </div>
-
     </div>
 </div>
 
@@ -110,11 +99,10 @@
             <span>Rs. <span id="total">0</span></span>
         </div>
     </div>
-    <button class="whatsapp-btn" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> آرڈر کریں</button>
+    <button class="whatsapp-btn" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> آرڈر کنفرم کریں</button>
 </div>
 
 <script>
-    // LocalStorage se data lena ta ke refresh par cart khali na ho
     let cart = JSON.parse(localStorage.getItem('gujrat_hardware_cart')) || [];
 
     window.onload = function() { updateUI(); };
@@ -124,11 +112,9 @@
     function addToCart(name, price) {
         let item = cart.find(i => i.name === name);
         item ? item.quantity++ : cart.push({name, price, quantity: 1});
-        saveCart();
+        localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
         updateUI();
     }
-
-    function saveCart() { localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart)); }
 
     function updateUI() {
         const list = document.getElementById('cart-list');
@@ -146,7 +132,11 @@
         document.getElementById('total').innerText = total.toLocaleString();
     }
 
-    function removeFromCart(index) { cart.splice(index, 1); saveCart(); updateUI(); }
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem('gujrat_hardware_cart', JSON.stringify(cart));
+        updateUI();
+    }
 
     function filterProducts() {
         let input = document.getElementById('searchInput').value.toLowerCase();
@@ -161,7 +151,7 @@
         if(cart.length === 0) return alert("کارٹ خالی ہے!");
         let totalVal = 0;
         cart.forEach(item => totalVal += (item.price * item.quantity));
-        let text = "*گجرات ہارڈ ویئر - ٹرم و ٹیپ آرڈر*%0A";
+        let text = "*گجرات ہارڈ ویئر - نیا آرڈر*%0A";
         cart.forEach(item => text += `• ${item.name} (${item.quantity})%0A`);
         text += `*ٹوٹل بل:* Rs. ${totalVal.toLocaleString()}`;
         window.open(`https://wa.me/923130781469?text=${text}`, '_blank');
@@ -170,4 +160,3 @@
 
 </body>
 </html>
-
